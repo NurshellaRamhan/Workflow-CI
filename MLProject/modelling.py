@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 
 
 def train_model():
-    # 1. Load data hasil preprocessing (WINE)
+    # Load data hasil preprocessing
     train_df = pd.read_csv("wine_preprocessing/wine_train.csv")
     test_df = pd.read_csv("wine_preprocessing/wine_test.csv")
 
@@ -17,20 +17,21 @@ def train_model():
     X_test = test_df.drop("quality", axis=1)
     y_test = test_df["quality"]
 
-    # 2. Aktifkan MLflow autolog
+    # Set experiment
     mlflow.set_experiment("Wine Quality Classification")
+
+    # Aktifkan autolog (INI SUDAH START RUN)
     mlflow.sklearn.autolog()
 
-    with mlflow.start_run():
-        # 3. Train model
-        model = LogisticRegression(max_iter=300)
-        model.fit(X_train, y_train)
+    # Train model (TANPA start_run)
+    model = LogisticRegression(max_iter=300)
+    model.fit(X_train, y_train)
 
-        # 4. Evaluasi
-        y_pred = model.predict(X_test)
-        acc = accuracy_score(y_test, y_pred)
+    # Evaluasi
+    y_pred = model.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
 
-        print("Accuracy:", acc)
+    print("Accuracy:", acc)
 
 
 if __name__ == "__main__":
