@@ -1,0 +1,10 @@
+digest: bb82f0cc
+name: dataset
+profile: '{"num_rows": 112, "num_elements": 448}'
+schema: '{"mlflow_colspec": [{"type": "double", "name": "SepalLengthCm", "required":
+  true}, {"type": "double", "name": "SepalWidthCm", "required": true}, {"type": "double",
+  "name": "PetalLengthCm", "required": true}, {"type": "double", "name": "PetalWidthCm",
+  "required": true}]}'
+source: '{"tags": {"mlflow.user": "ASUS TUF GAMING", "mlflow.source.name": "modelling.py",
+  "mlflow.source.type": "LOCAL"}}'
+source_type: code
