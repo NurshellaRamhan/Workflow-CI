@@ -1,0 +1,42 @@
+name: MLflow CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  train-mlflow:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1️⃣ Checkout repo
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2️⃣ Setup Python
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    # 3️⃣ Check environment
+    - name: Check environment
+      run: |
+        python --version
+        pip --version
+
+    # 4️⃣ Install dependencies
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install mlflow pandas scikit-learn
+
+    # 5️⃣ Run MLflow Project (TANPA conda)
+    - name: Run MLflow Project
+      run: |
+        mlflow run MLProject --env-manager=local
+
+    # 6️⃣ Get latest MLflow run
+    - name: Show latest MLflow run
+      run: |
+        ls -R mlruns || echo "mlruns folder not found"
